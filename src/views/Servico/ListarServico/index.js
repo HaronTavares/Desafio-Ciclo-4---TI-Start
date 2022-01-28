@@ -1,7 +1,29 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Container, Table } from "reactstrap";
 
-export const ListarServico = () =>{
-    return(
+import { api } from "../../../config";
+
+export const ListarServico = () => {
+
+    const [data, setData] = useState([]);
+
+    const getServicos = async () => {
+        await axios.get(api + '/listaservicos')
+            .then((response) => {
+                console.log(response.data.servicos);
+                setData(response.data.servicos);
+            })
+            .catch(() => {
+                console.log('Erro: sem conezão com a API.')
+            });
+    };
+
+    useEffect(() => {
+        getServicos();
+    }, []);
+
+    return (
         <div>
             <Container>
                 <h1>Visualizar informações do servico</h1>
@@ -15,24 +37,14 @@ export const ListarServico = () =>{
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th>1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th>2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th>3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
+                        {data.map(item => (
+                            <tr key={item.id}>
+                                <td>{item.id}</td>
+                                <td>{item.nome}</td>
+                                <td>{item.descricao}</td>
+                                <td className='text-center/'>Botão</td>
+                            </tr>
+                        ))}
                     </tbody>
                 </Table>
             </Container>
