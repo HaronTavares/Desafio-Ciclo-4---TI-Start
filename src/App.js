@@ -5,7 +5,7 @@ import { Menu } from './components/Menu.js';
 import { Home } from './views/Home';
 import { ListarCliente } from './views/Cliente/Listar/';
 import { ListarPedido } from './views/Pedido/Listar/';
-import { ListarServico } from './views/Servico/Listar/';
+import { ListarServico } from './views/Servico/ListarServico/';
 
 function App() {
   return (
