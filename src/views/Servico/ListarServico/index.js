@@ -36,11 +36,16 @@ export const ListarServico = () => {
     return (
         <div>
             <Container>
-                <div>
-                    <h1>Visualizar informações do servico</h1>
+                <div className='d-flex'>
+                    <div>
+                        <h1>Visualizar informações do servico</h1>
+                    </div>
+                    <div className='m-auto p-2'>
+                        <Link to='/cadastrarservico'
+                            className='btn btn-outline-primary btn-sm'>Cadastrar</Link>
+                    </div>
+                    {status.type === 'error' ? <Alert color='danger'> {status.message} </Alert> : ""}
                 </div>
-                {status.type === 'error' ? <Alert color='danger'> {status.message} </Alert> : ""}
-
                 <Table striped>
                     <thead>
                         <tr>
