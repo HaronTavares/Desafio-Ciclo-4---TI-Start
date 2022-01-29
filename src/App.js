@@ -6,17 +6,19 @@ import { Home } from './views/Home';
 import { ListarCliente } from './views/Cliente/Listar/';
 import { ListarPedido } from './views/Pedido/Listar/';
 import { ListarServico } from './views/Servico/ListarServico/';
+import { Item } from './views/Servico/Item/';
 
 function App() {
   return (
     <div>
       <Router>
-        <Menu/>
+        <Menu />
         <Switch>
-          <Route path = "/" element = {<Home/>}/>
-          <Route path = '/listar-cliente' element = {<ListarCliente/>}/>
-          <Route path = '/listar-pedido' element = {<ListarPedido/>}/>
-          <Route path = '/listar-servico' element = {<ListarServico/>}/>
+          <Route path="/" element={<Home />} />
+          <Route path='/listar-cliente' element={<ListarCliente />} />
+          <Route path='/listar-pedido' element={<ListarPedido />} />
+          <Route path='/listar-servico' element={<ListarServico />} />
+          <Route path='/listar-pedido/:id' element={<Item />} />
         </Switch>
       </Router>
     </div>
