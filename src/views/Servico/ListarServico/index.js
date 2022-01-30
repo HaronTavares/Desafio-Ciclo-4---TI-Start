@@ -41,7 +41,7 @@ export const ListarServico = () => {
                         <h1>Visualizar informações do servico</h1>
                     </div>
                     <div className='m-auto p-2'>
-                        <Link to='/cadastrarservico'
+                        <Link to='/cadastrar-servico'
                             className='btn btn-outline-primary btn-sm'>Cadastrar</Link>
                     </div>
                     {status.type === 'error' ? <Alert color='danger'> {status.message} </Alert> : ""}
@@ -63,9 +63,9 @@ export const ListarServico = () => {
                                 <td>{item.descricao}</td>
                                 <td className='text-center/'>
                                     <Link to={'/listar-pedido/' + item.id}
-                                        className='btn btn-outline-primary btn-sm'>
-                                        Consultar
-                                    </Link>
+                                        className='btn btn-outline-primary btn-sm'>Consultar</Link>
+                                    <Link to={'/editar-pedido/' + item.id}
+                                        className='btn btn-outline-primary btn-sm'>Editar</Link>
                                 </td>
                             </tr>
                         ))}

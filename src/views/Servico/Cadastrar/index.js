@@ -80,6 +80,7 @@ export const Cadastrar = () => {
                 </FormGroup>
 
                 <Button type='submit' outline color='success'>Cadastrar</Button>
+                <Button type="reset" outline color="success">Limpar</Button>
             </Form>
         </Container>
     );
