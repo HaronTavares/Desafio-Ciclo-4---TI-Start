@@ -8,7 +8,9 @@ import { CadastrarCliente } from './views/Cliente/CadastrarCliente'
 import { ListarCliente } from './views/Cliente/ListarCliente';
 import { EditarCliente } from './views/Cliente/EditarCliente';
 
-import { ListarPedido } from './views/Pedido/Listar/';
+import { CadastrarPedido } from './views/Pedido/CadastrarPedido'
+import { ListarPedido } from './views/Pedido/ListarPedido';
+import { EditarPedido } from './views/Pedido/EditarPedido';
 
 import { CadastrarServico } from './views/Servico/CadastrarServico';
 import { ListarServico } from './views/Servico/ListarServico/';
@@ -27,7 +29,9 @@ function App() {
           <Route path='/listar-cliente' element={<ListarCliente />} />
           <Route path='/editar-cliente/:id' element={<EditarCliente />} />
 
+          <Route path='/cadastrar-pedido' element={<CadastrarPedido />} />
           <Route path='/listar-pedido' element={<ListarPedido />} />
+          <Route path='/editar-pedido/:id' element={<EditarPedido />} />
 
           <Route path='/cadastrar-servico' element={<CadastrarServico />} />
           <Route path='/listar-servico' element={<ListarServico />} />

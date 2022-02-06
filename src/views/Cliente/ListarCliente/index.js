@@ -58,7 +58,7 @@ export const ListarCliente = () => {
             <Container>
                 <div className='d-flex'>
                     <div className='m-auto p-2'>
-                        <h1>Visualizar clientes</h1>
+                        <h1>Visualizar informações dos clientes</h1>
                     </div>
 
                     <div className='p-2'>
@@ -78,6 +78,7 @@ export const ListarCliente = () => {
                             <th>UF</th>
                             <th>Nascimento</th>
                             <th>Cliente Desde</th>
+                            <th>Ação</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -92,7 +93,7 @@ export const ListarCliente = () => {
                                 <td>{item.clienteDesde}</td>
                                 <td className='text-center/'>
                                     <Link to={'/listar-pedidos-clientes/' + item.id}
-                                        className='btn btn-outline-primary btn-sm m-1'>Consultar</Link>
+                                        className='btn btn-outline-primary btn-sm m-1'>Consultar Pedidos</Link>
                                     <Link to={'/editar-cliente/' + item.id}
                                         className='btn btn-outline-primary btn-sm m-1'>Editar</Link>
                                     <span className='btn btn-outline-danger btn-sm mr-1 m-1'
