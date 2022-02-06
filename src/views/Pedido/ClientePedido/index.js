@@ -43,7 +43,7 @@ export const ClientePedido = () => {
             <Container>
                 <div className='d-flex'>
                     <div className='m-auto p-2'>
-                        <h1>Itens pedidos do pedido {idd}</h1>
+                        <h1>Cliente responsável pelo pedido</h1>
                     </div>
 
                     {/* <div className='p-2'>

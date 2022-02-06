@@ -5,7 +5,7 @@ import { Alert, Container, Table } from "reactstrap";
 
 import { api } from "../../../config";
 
-export const ListarPedido = () => {
+export const ListarCompra = () => {
 
     const [data, setData] = useState([]);
 
@@ -14,11 +14,11 @@ export const ListarPedido = () => {
         message: ''
     });
 
-    const getPedidos = async () => {
-        await axios.get(api + '/listapedidos')
+    const getCompras = async () => {
+        await axios.get(api + '/listacompras')
             .then((response) => {
-                console.log(response.data.pedidos);
-                setData(response.data.pedidos);
+                console.log(response.data.compras);
+                setData(response.data.compras);
             })
             .catch(() => {
                 setStatus({
@@ -29,17 +29,17 @@ export const ListarPedido = () => {
             });
     };
 
-    const apagarPedido = async (idPedido) => {
-        console.log(idPedido);
+    const apagarCompra = async (idCompra) => {
+        console.log(idCompra);
 
         const headers = {
             'Content-Type': 'application/json'
         };
 
-        await axios.get(api + '/excluirpedido/' + idPedido, { headers })
+        await axios.get(api + '/excluircompra/' + idCompra, { headers })
             .then((response) => {
                 console.log(response.data.error);
-                getPedidos();
+                getCompras();
             })
             .catch(() => {
                 setStatus({
@@ -50,7 +50,7 @@ export const ListarPedido = () => {
     };
 
     useEffect(() => {
-        getPedidos();
+        getCompras();
     }, []);
 
     return (
@@ -58,11 +58,11 @@ export const ListarPedido = () => {
             <Container>
                 <div className='d-flex'>
                     <div className='m-auto p-2'>
-                        <h1>Visualizar informações dos pedidos</h1>
+                        <h1>Visualizar informações das compras</h1>
                     </div>
 
                     <div className='p-2'>
-                        <Link to='/cadastrar-pedido'
+                        <Link to='/cadastrar-compra'
                             className='btn btn-outline-success btn-sm'>Cadastrar</Link>
                     </div>
                 </div>
@@ -72,7 +72,7 @@ export const ListarPedido = () => {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Data do pedido</th>
+                            <th>Data da compra</th>
                             <th>ID do cliente</th>
                             <th className='d-flex justify-content-center'>Ação</th>
                         </tr>
@@ -84,14 +84,14 @@ export const ListarPedido = () => {
                                 <td>{item.data}</td>
                                 <td>{item.ClienteId}</td>
                                 <td className='text-center/ d-flex justify-content-center'>
-                                    <Link to={'/listar-cliente-pedido/' + item.ClienteId}
+                                    <Link to={'/listar-cliente-compra/' + item.ClienteId}
                                         className='btn btn-outline-primary btn-sm m-1'>Consultar Cliente</Link>
-                                    <Link to={'/listar-itempedidos-pedido/' + item.id}
+                                    <Link to={'/listar-itemcompras-compra/' + item.id}
                                         className='btn btn-outline-primary btn-sm m-1'>Consultar Itens</Link>
-                                    <Link to={'/editar-pedido/' + item.id}
+                                    <Link to={'/editar-compra/' + item.id}
                                         className='btn btn-outline-secondary btn-sm m-1'>Editar</Link>
                                     <span className='btn btn-outline-danger btn-sm mr-1 m-1'
-                                        onClick={() => apagarPedido(item.id)}>Excluir</span>
+                                        onClick={() => apagarCompra(item.id)}>Excluir</span>
                                 </td>
                             </tr>
                         ))}

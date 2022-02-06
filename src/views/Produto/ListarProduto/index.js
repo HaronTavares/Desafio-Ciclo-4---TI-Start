@@ -5,7 +5,7 @@ import { Alert, Container, Table } from "reactstrap";
 
 import { api } from "../../../config";
 
-export const ListarPedido = () => {
+export const ListarProduto = () => {
 
     const [data, setData] = useState([]);
 
@@ -14,11 +14,11 @@ export const ListarPedido = () => {
         message: ''
     });
 
-    const getPedidos = async () => {
-        await axios.get(api + '/listapedidos')
+    const getProdutos = async () => {
+        await axios.get(api + '/listaprodutos')
             .then((response) => {
-                console.log(response.data.pedidos);
-                setData(response.data.pedidos);
+                console.log(response.data.produtos);
+                setData(response.data.produtos);
             })
             .catch(() => {
                 setStatus({
@@ -29,17 +29,17 @@ export const ListarPedido = () => {
             });
     };
 
-    const apagarPedido = async (idPedido) => {
-        console.log(idPedido);
+    const apagarProduto = async (idProduto) => {
+        console.log(idProduto);
 
         const headers = {
             'Content-Type': 'application/json'
         };
 
-        await axios.get(api + '/excluirpedido/' + idPedido, { headers })
+        await axios.get(api + '/excluirproduto/' + idProduto, { headers })
             .then((response) => {
                 console.log(response.data.error);
-                getPedidos();
+                getProdutos();
             })
             .catch(() => {
                 setStatus({
@@ -50,7 +50,7 @@ export const ListarPedido = () => {
     };
 
     useEffect(() => {
-        getPedidos();
+        getProdutos();
     }, []);
 
     return (
@@ -58,11 +58,11 @@ export const ListarPedido = () => {
             <Container>
                 <div className='d-flex'>
                     <div className='m-auto p-2'>
-                        <h1>Visualizar informações dos pedidos</h1>
+                        <h1>Visualizar informações dos produtos</h1>
                     </div>
 
                     <div className='p-2'>
-                        <Link to='/cadastrar-pedido'
+                        <Link to='/cadastrar-produto'
                             className='btn btn-outline-success btn-sm'>Cadastrar</Link>
                     </div>
                 </div>
@@ -72,8 +72,8 @@ export const ListarPedido = () => {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Data do pedido</th>
-                            <th>ID do cliente</th>
+                            <th>Nome</th>
+                            <th>Descrição</th>
                             <th className='d-flex justify-content-center'>Ação</th>
                         </tr>
                     </thead>
@@ -81,17 +81,15 @@ export const ListarPedido = () => {
                         {data.map(item => (
                             <tr key={item.id}>
                                 <td>{item.id}</td>
-                                <td>{item.data}</td>
-                                <td>{item.ClienteId}</td>
+                                <td>{item.nome}</td>
+                                <td>{item.descricao}</td>
                                 <td className='text-center/ d-flex justify-content-center'>
-                                    <Link to={'/listar-cliente-pedido/' + item.ClienteId}
-                                        className='btn btn-outline-primary btn-sm m-1'>Consultar Cliente</Link>
-                                    <Link to={'/listar-itempedidos-pedido/' + item.id}
+                                    <Link to={'/listar-itemcompras-produto/' + item.id}
                                         className='btn btn-outline-primary btn-sm m-1'>Consultar Itens</Link>
-                                    <Link to={'/editar-pedido/' + item.id}
+                                    <Link to={'/editar-produto/' + item.id}
                                         className='btn btn-outline-secondary btn-sm m-1'>Editar</Link>
                                     <span className='btn btn-outline-danger btn-sm mr-1 m-1'
-                                        onClick={() => apagarPedido(item.id)}>Excluir</span>
+                                        onClick={() => apagarProduto(item.id)}>Excluir</span>
                                 </td>
                             </tr>
                         ))}

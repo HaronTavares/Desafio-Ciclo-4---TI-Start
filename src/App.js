@@ -10,6 +10,7 @@ import { CadastrarCliente } from './views/Cliente/CadastrarCliente'
 import { ListarCliente } from './views/Cliente/ListarCliente';
 import { EditarCliente } from './views/Cliente/EditarCliente';
 import { PedidoCliente } from './views/Cliente/PedidoCliente';
+import { CompraCliente } from './views/Cliente/CompraCliente';
 
 //Pedido
 
@@ -34,6 +35,29 @@ import { ListarServico } from './views/Servico/ListarServico/';
 import { EditarServico } from './views/Servico/EditarServico';
 import { ItemServico } from './views/Servico/ItemServico/';
 
+//Compra
+
+import { CadastrarCompra } from './views/Compra/CadastrarCompra'
+import { ListarCompra } from './views/Compra/ListarCompra';
+import { EditarCompra } from './views/Compra/EditarCompra';
+import { ClienteCompra } from './views/Compra/ClienteCompra/';
+import { ItemCompra } from './views/Compra/ItemCompra/';
+
+//Item Compra
+
+import { CadastrarItemCompra } from './views/ItemCompra/CadastrarItemCompra'
+import { ListarItemCompra } from './views/ItemCompra/ListarItemCompra';
+import { EditarItemCompra } from './views/ItemCompra/EditarItemCompra';
+import { CompraItem } from './views/ItemCompra/CompraItem';
+import { ProdutoItem } from './views/ItemCompra/ProdutoItem';
+
+//Produto
+
+import { CadastrarProduto } from './views/Produto/CadastrarProduto';
+import { ListarProduto } from './views/Produto/ListarProduto/';
+import { EditarProduto } from './views/Produto/EditarProduto';
+import { ItemProduto } from './views/Produto/ItemProduto/';
+
 function App() {
   return (
     <div>
@@ -48,6 +72,7 @@ function App() {
           <Route path='/listar-cliente' element={<ListarCliente />} />
           <Route path='/editar-cliente/:id' element={<EditarCliente />} />
           <Route path='/listar-pedidos-cliente/:id' element={<PedidoCliente />} />  
+          <Route path='/listar-compras-cliente/:id' element={<CompraCliente />} /> 
 
           {/* Pedido */}
 
@@ -70,7 +95,30 @@ function App() {
           <Route path='/cadastrar-servico' element={<CadastrarServico />} />
           <Route path='/listar-servico' element={<ListarServico />} />
           <Route path='/editar-servico/:id' element={<EditarServico />} />
-          <Route path='/listar-itempedidos-servico/:id' element={<ItemServico />} />    
+          <Route path='/listar-itempedidos-servico/:id' element={<ItemServico />} /> 
+
+          {/* Compra */}
+
+          <Route path='/cadastrar-compra' element={<CadastrarCompra />} />
+          <Route path='/listar-compra' element={<ListarCompra />} />
+          <Route path='/editar-compra/:id' element={<EditarCompra />} />
+          <Route path='/listar-cliente-compra/:id' element={<ClienteCompra />} />
+          <Route path='/listar-itemcompras-compra/:id' element={<ItemCompra />} />
+
+          {/* Item compra */} 
+
+          <Route path='/cadastrar-itemcompra' element={<CadastrarItemCompra />} />
+          <Route path='/listar-itemcompra' element={<ListarItemCompra />} />
+          <Route path='/editar-itemcompra/:id' element={<EditarItemCompra />} />
+          <Route path='/listar-compra-itemcompra/:id' element={<CompraItem />} />
+          <Route path='/listar-produto-itemcompra/:id' element={<ProdutoItem />} />
+
+          {/* Produto */}
+
+          <Route path='/cadastrar-produto' element={<CadastrarProduto />} />
+          <Route path='/listar-produto' element={<ListarProduto />} />
+          <Route path='/editar-produto/:id' element={<EditarProduto />} />
+          <Route path='/listar-itemcompras-produto/:id' element={<ItemProduto />} />   
         </Switch>
       </Router>
     </div>

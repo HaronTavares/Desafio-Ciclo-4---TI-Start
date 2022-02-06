@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Alert, Button, Container, Table } from "reactstrap";
 
 import { api } from "../../../config";
 
-export const ItemPedido = () => {
+export const ProdutoItem = () => {
 
     const [data, setData] = useState([]);
 
@@ -21,11 +21,11 @@ export const ItemPedido = () => {
     });
 
     useEffect(() => {
-        const getItem = async () => {
-            await axios.get(api + '/pedido/' + idd + '/pedidos')
+        const getProduto = async () => {
+            await axios.get(api + '/itemcompra/' + idd + '/produto')
                 .then((response) => {
-                    console.log(response.data.item);
-                    setData(response.data.item);
+                    console.log(response.data.produto);
+                    setData(response.data.produto);
                 })
                 .catch(() => {
                     setStatus({
@@ -35,7 +35,7 @@ export const ItemPedido = () => {
                     //console.log('Erro: sem conexão com a API.')
                 });
         };
-        getItem();
+        getProduto();
     }, [idd]);
 
     return (
@@ -43,13 +43,9 @@ export const ItemPedido = () => {
             <Container>
                 <div className='d-flex'>
                     <div className='m-auto p-2'>
-                        <h1>Itens pedidos do pedido {idd}</h1>
+                        <h1>Produto do item</h1>
                     </div>
 
-                    {/* <div className='p-2'>
-                        <Link to='/listar-pedido'
-                            className='btn btn-outline-success btn-sm mr-1'>Pedidos</Link>
-                    </div> */}
                     <div className='p-2'>
                         <Button className='btn btn-outline-secondary btn-sm mr-1' type='button' outline
                             onClick={() => navegar(-1)}>Voltar</Button>
@@ -60,22 +56,17 @@ export const ItemPedido = () => {
                 <Table striped>
                     <thead>
                         <tr>
-                            <th>Serviço</th>
-                            <th>Quantidade</th>
-                            <th>Valor</th>
-                            <th>Visualizar</th>
+                            <th>ID</th>
+                            <th>Nome do produto</th>
+                            <th>Descrição</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map(item => (
-                            <tr key={item.PedidoId}>
-                                <td>{item.ServicoId}</td>
-                                <td>{item.quantidade}</td>
-                                <td>{item.valor}</td>
-                                <td className='text-center/'>
-                                    <Link to={'/listar-servico-itempedido/' + item.ServicoId}
-                                        className='btn btn-outline-primary btn-sm m-1'>Consultar Serviço</Link>
-                                </td>
+                        {data.map(produto => (
+                            <tr key={produto.id}>
+                                <td>{produto.id}</td>
+                                <td>{produto.nome}</td>
+                                <td>{produto.descricao}</td>
                             </tr>
                         ))}
                     </tbody>

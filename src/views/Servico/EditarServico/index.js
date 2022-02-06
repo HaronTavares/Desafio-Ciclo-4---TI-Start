@@ -63,6 +63,7 @@ export const EditarServico = () => {
                     // console.log(response.data.servico);
                     setNome(response.data.servico.nome);
                     setDescricao(response.data.servico.descricao);
+                    
                 })
                 .catch(() => {
                     console.log('Erro: Não foi possível conectar a API.')

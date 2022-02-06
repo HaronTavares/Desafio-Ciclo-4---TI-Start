@@ -83,7 +83,7 @@ export const EditarCliente = () => {
             <Container>
                 <div className='d-flex'>
                     <div className='m-auto p-2'>
-                        <h1>Editar cliente</h1>
+                        <h1>Editar cliente {idd}</h1>
                     </div>
 
                     <div className='p-2'>

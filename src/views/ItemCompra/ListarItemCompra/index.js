@@ -5,7 +5,7 @@ import { Alert, Container, Table } from "reactstrap";
 
 import { api } from "../../../config";
 
-export const ListarPedido = () => {
+export const ListarItemCompra = () => {
 
     const [data, setData] = useState([]);
 
@@ -14,11 +14,11 @@ export const ListarPedido = () => {
         message: ''
     });
 
-    const getPedidos = async () => {
-        await axios.get(api + '/listapedidos')
+    const getItemCompras = async () => {
+        await axios.get(api + '/listaitemcompras')
             .then((response) => {
-                console.log(response.data.pedidos);
-                setData(response.data.pedidos);
+                console.log(response.data.itemcompras);
+                setData(response.data.itemcompras);
             })
             .catch(() => {
                 setStatus({
@@ -29,17 +29,18 @@ export const ListarPedido = () => {
             });
     };
 
-    const apagarPedido = async (idPedido) => {
-        console.log(idPedido);
+    const apagarItemCompra = async (CompraId, ProdutoId) => {
+        console.log(CompraId);
+        console.log(ProdutoId);
 
         const headers = {
             'Content-Type': 'application/json'
         };
 
-        await axios.get(api + '/excluirpedido/' + idPedido, { headers })
+        await axios.get(api + '/compra/' + CompraId + '/produto/' + ProdutoId + '/excluiritemcompra', { headers })
             .then((response) => {
                 console.log(response.data.error);
-                getPedidos();
+                getItemCompras();
             })
             .catch(() => {
                 setStatus({
@@ -50,7 +51,7 @@ export const ListarPedido = () => {
     };
 
     useEffect(() => {
-        getPedidos();
+        getItemCompras();
     }, []);
 
     return (
@@ -58,11 +59,11 @@ export const ListarPedido = () => {
             <Container>
                 <div className='d-flex'>
                     <div className='m-auto p-2'>
-                        <h1>Visualizar informações dos pedidos</h1>
+                        <h1>Visualizar informações dos itens comprados</h1>
                     </div>
 
                     <div className='p-2'>
-                        <Link to='/cadastrar-pedido'
+                        <Link to='/cadastrar-itemcompra'
                             className='btn btn-outline-success btn-sm'>Cadastrar</Link>
                     </div>
                 </div>
@@ -71,27 +72,29 @@ export const ListarPedido = () => {
                 <Table striped>
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Data do pedido</th>
-                            <th>ID do cliente</th>
+                            <th>ID da Compra</th>
+                            <th>ID do Produto</th>
+                            <th>Quantidade</th>
+                            <th>Valor</th>
                             <th className='d-flex justify-content-center'>Ação</th>
                         </tr>
                     </thead>
                     <tbody>
                         {data.map(item => (
-                            <tr key={item.id}>
-                                <td>{item.id}</td>
-                                <td>{item.data}</td>
-                                <td>{item.ClienteId}</td>
+                            <tr key={item.CompraId}>
+                                <td>{item.CompraId}</td>
+                                <td>{item.ProdutoId}</td>
+                                <td>{item.quantidade}</td>
+                                <td>{item.valor}</td>
                                 <td className='text-center/ d-flex justify-content-center'>
-                                    <Link to={'/listar-cliente-pedido/' + item.ClienteId}
-                                        className='btn btn-outline-primary btn-sm m-1'>Consultar Cliente</Link>
-                                    <Link to={'/listar-itempedidos-pedido/' + item.id}
-                                        className='btn btn-outline-primary btn-sm m-1'>Consultar Itens</Link>
-                                    <Link to={'/editar-pedido/' + item.id}
+                                    <Link to={'/listar-compra-itemcompra/' + item.CompraId}
+                                        className='btn btn-outline-primary btn-sm m-1'>Consultar Compra</Link>
+                                    <Link to={'/listar-produto-itemcompra/' + item.ProdutoId}
+                                        className='btn btn-outline-primary btn-sm m-1'>Consultar Produto</Link>
+                                    <Link to={'/editar-itemcompra/' + item.CompraId}
                                         className='btn btn-outline-secondary btn-sm m-1'>Editar</Link>
                                     <span className='btn btn-outline-danger btn-sm mr-1 m-1'
-                                        onClick={() => apagarPedido(item.id)}>Excluir</span>
+                                        onClick={() => apagarItemCompra(item.CompraId, item.ProdutoId)}>Excluir</span>
                                 </td>
                             </tr>
                         ))}

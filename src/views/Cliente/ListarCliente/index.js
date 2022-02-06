@@ -78,7 +78,7 @@ export const ListarCliente = () => {
                             <th>UF</th>
                             <th>Nascimento</th>
                             <th>Cliente Desde</th>
-                            <th>Ação</th>
+                            <th className='d-flex justify-content-center'>Ação</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -91,11 +91,13 @@ export const ListarCliente = () => {
                                 <td>{item.uf}</td>
                                 <td>{item.nascimento}</td>
                                 <td>{item.clienteDesde}</td>
-                                <td className='text-center/'>
+                                <td className='text-center/ d-flex justify-content-center'>
                                     <Link to={'/listar-pedidos-cliente/' + item.id}
-                                        className='btn btn-outline-primary btn-sm m-1'>Consultar Pedidos</Link>
+                                        className='btn btn-outline-primary btn-sm m-1'>Pedidos</Link>
+                                    <Link to={'/listar-compras-cliente/' + item.id}
+                                        className='btn btn-outline-primary btn-sm m-1'>Compras</Link>
                                     <Link to={'/editar-cliente/' + item.id}
-                                        className='btn btn-outline-primary btn-sm m-1'>Editar</Link>
+                                        className='btn btn-outline-secondary btn-sm m-1'>Editar</Link>
                                     <span className='btn btn-outline-danger btn-sm mr-1 m-1'
                                         onClick={() => apagarCliente(item.id)}>Excluir</span>
                                 </td>

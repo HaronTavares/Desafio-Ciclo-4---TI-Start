@@ -30,7 +30,7 @@ export const EditarPedido = () => {
             'Content-Type': 'application/json'
         };
 
-        await axios.put(api + '/atualizapedido', { data, ClienteId }, { headers })
+        await axios.put(api + '/atualizapedido', { id, data, ClienteId }, { headers })
             .then((response) => {
                 // console.log(response.data.error);
                 // console.log(response.data.message);

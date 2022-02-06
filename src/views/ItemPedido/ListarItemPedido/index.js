@@ -76,7 +76,7 @@ export const ListarItemPedido = () => {
                             <th>ID do Serviço</th>
                             <th>Quantidade</th>
                             <th>Valor</th>
-                            <th>Ação</th>
+                            <th className='d-flex justify-content-center'>Ação</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -86,13 +86,13 @@ export const ListarItemPedido = () => {
                                 <td>{item.ServicoId}</td>
                                 <td>{item.quantidade}</td>
                                 <td>{item.valor}</td>
-                                <td className='text-center/'>
+                                <td className='text-center/ d-flex justify-content-center'>
                                     <Link to={'/listar-pedido-itempedido/' + item.PedidoId}
                                         className='btn btn-outline-primary btn-sm m-1'>Consultar Pedido</Link>
                                     <Link to={'/listar-servico-itempedido/' + item.ServicoId}
                                         className='btn btn-outline-primary btn-sm m-1'>Consultar Serviço</Link>
                                     <Link to={'/editar-itempedido/' + item.PedidoId}
-                                        className='btn btn-outline-primary btn-sm m-1'>Editar</Link>
+                                        className='btn btn-outline-secondary btn-sm m-1'>Editar</Link>
                                     <span className='btn btn-outline-danger btn-sm mr-1 m-1'
                                         onClick={() => apagarItemPedido(item.PedidoId, item.ServicoId)}>Excluir</span>
                                 </td>

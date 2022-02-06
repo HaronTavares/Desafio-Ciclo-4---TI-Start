@@ -5,7 +5,7 @@ import { Alert, Button, Container, Table } from "reactstrap";
 
 import { api } from "../../../config";
 
-export const ItemPedido = () => {
+export const ItemCompra = () => {
 
     const [data, setData] = useState([]);
 
@@ -22,7 +22,7 @@ export const ItemPedido = () => {
 
     useEffect(() => {
         const getItem = async () => {
-            await axios.get(api + '/pedido/' + idd + '/pedidos')
+            await axios.get(api + '/compra/' + idd + '/compras')
                 .then((response) => {
                     console.log(response.data.item);
                     setData(response.data.item);
@@ -43,13 +43,9 @@ export const ItemPedido = () => {
             <Container>
                 <div className='d-flex'>
                     <div className='m-auto p-2'>
-                        <h1>Itens pedidos do pedido {idd}</h1>
+                        <h1>Itens comprados da compra {idd}</h1>
                     </div>
 
-                    {/* <div className='p-2'>
-                        <Link to='/listar-pedido'
-                            className='btn btn-outline-success btn-sm mr-1'>Pedidos</Link>
-                    </div> */}
                     <div className='p-2'>
                         <Button className='btn btn-outline-secondary btn-sm mr-1' type='button' outline
                             onClick={() => navegar(-1)}>Voltar</Button>
@@ -60,7 +56,7 @@ export const ItemPedido = () => {
                 <Table striped>
                     <thead>
                         <tr>
-                            <th>Serviço</th>
+                            <th>Produto</th>
                             <th>Quantidade</th>
                             <th>Valor</th>
                             <th>Visualizar</th>
@@ -68,13 +64,13 @@ export const ItemPedido = () => {
                     </thead>
                     <tbody>
                         {data.map(item => (
-                            <tr key={item.PedidoId}>
-                                <td>{item.ServicoId}</td>
+                            <tr key={item.CompraId}>
+                                <td>{item.ProdutoId}</td>
                                 <td>{item.quantidade}</td>
                                 <td>{item.valor}</td>
                                 <td className='text-center/'>
-                                    <Link to={'/listar-servico-itempedido/' + item.ServicoId}
-                                        className='btn btn-outline-primary btn-sm m-1'>Consultar Serviço</Link>
+                                    <Link to={'/listar-produto-itemcompra/' + item.ProdutoId}
+                                        className='btn btn-outline-primary btn-sm m-1'>Consultar Produto</Link>
                                 </td>
                             </tr>
                         ))}

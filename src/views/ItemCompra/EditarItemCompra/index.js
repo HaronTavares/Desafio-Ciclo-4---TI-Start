@@ -5,7 +5,7 @@ import { useEffect } from 'react/cjs/react.development';
 import { Alert, Button, Container, Form, FormGroup, Input, Label, Spinner } from 'reactstrap'
 import { api } from '../../../config';
 
-export const EditarItemPedido = () => {
+export const EditarItemCompra = () => {
 
     // const [data, setData] = useState([]);
 
@@ -16,7 +16,7 @@ export const EditarItemPedido = () => {
 
     console.log(idd);
 
-    const [ServicoId, setServicoId] = useState('');
+    const [ProdutoId, setProdutoId] = useState('');
     const [quantidade, setQuantidade] = useState('');
     const [valor, setValor] = useState('');
 
@@ -27,14 +27,14 @@ export const EditarItemPedido = () => {
         message: ''
     });
 
-    const edtItemPedido = async e => {
+    const edtItemCompra = async e => {
         e.preventDefault();
 
         const headers = {
             'Content-Type': 'application/json'
         };
 
-        await axios.put(api + '/pedidos/' + idd + '/atualizaitem', { ServicoId, quantidade, valor }, { headers })
+        await axios.put(api + '/compras/' + idd + '/atualizaitem', { ProdutoId, quantidade, valor }, { headers })
             .then((response) => {
                 // console.log(response.data.error);
                 // console.log(response.data.message);
@@ -61,18 +61,18 @@ export const EditarItemPedido = () => {
     };
 
     useEffect(() => {
-        const getItemPedido = async () => {
-            await axios.get(api + '/pedidos/' + idd + '/itempedidos')
+        const getItemCompra = async () => {
+            await axios.get(api + '/compras/' + idd + '/itemcompras')
                 .then((response) => {
-                    setServicoId(response.data.itempedido.ServicoId);
-                    setQuantidade(response.data.itempedido.quantidade);
-                    setValor(response.data.itempedido.valor);
+                    setProdutoId(response.data.itemcompra.ProdutoId);
+                    setQuantidade(response.data.itemcompra.quantidade);
+                    setValor(response.data.itemcompra.valor);
                 })
                 .catch(() => {
                     console.log('Erro: Não foi possível conectar a API.')
                 })
         };
-        getItemPedido();
+        getItemCompra();
     }, [idd]);
 
     return (
@@ -80,7 +80,7 @@ export const EditarItemPedido = () => {
             <Container>
                 <div className='d-flex'>
                     <div className='m-auto p-2'>
-                        <h1>Editar item pedido</h1>
+                        <h1>Editar item comprado</h1>
                     </div>
 
                     <div className='p-2'>
@@ -95,29 +95,29 @@ export const EditarItemPedido = () => {
 
                 {status.type === 'success' ? <Alert color='success'>{status.message}</Alert> : ''}
 
-                <Form className='p-2' onSubmit={edtItemPedido}>
+                <Form className='p-2' onSubmit={edtItemCompra}>
                     <FormGroup className='p-2'>
-                        <Label>Insira o serviço do item a ser editado</Label>
-                        <Input type='text' name='ServicoId'
-                            placeholder='ID do serviço' value={ServicoId}
-                            onChange={e => setServicoId(e.target.value)} />
+                        <Label>Insira o produto do item a ser editado</Label>
+                        <Input type='text' name='ProdutoId'
+                            placeholder='ID do produto' value={ProdutoId}
+                            onChange={e => setProdutoId(e.target.value)} />
                     </FormGroup>
                 </Form>
 
                 <hr className='m-1' />
 
-                <Form className='p-2' onSubmit={edtItemPedido}>
+                <Form className='p-2' onSubmit={edtItemCompra}>
                     <FormGroup className='p-2'>
                         <Label>Quantidade</Label>
                         <Input type='text' name='quantidade'
-                            placeholder='Quantidade do item pedido' value={quantidade}
+                            placeholder='Quantidade do item comprado' value={quantidade}
                             onChange={e => setQuantidade(e.target.value)} />
                     </FormGroup>
 
                     <FormGroup className='p-2'>
                         <Label>Valor</Label>
                         <Input type='text' name='valor'
-                            placeholder='Valor do item pedido' value={valor}
+                            placeholder='Valor do item comprado' value={valor}
                             onChange={e => setValor(e.target.value)} />
                     </FormGroup>
 
