@@ -13,7 +13,7 @@ export const Home = () => {
             <Container>
                 <div className='d-flex row justify-content-center'>
                     <div className='w-40'>
-                        <h4 className='d-flex justify-content-center p-2'>Seja Bem vindo(a) ao site da TI Academy!</h4>
+                        <h4 className='d-flex justify-content-center p-2'>Seja bem-vindo(a) ao site da TI Academy!</h4>
                         <div className='m-4'></div>
                     </div>
                     <div className='d-flex justify-content-center'>
@@ -23,20 +23,20 @@ export const Home = () => {
                             </div>
                             <div className='p-1'></div>
                             <div className='d-flex justify-content-between m-4'>
-                                <h6 className=''>Acessar lista de pedidos registrados</h6>
+                                <h6 className=''>Acessar lista de pedidos realizados</h6>
                             </div>
                             <div className='d-flex justify-content-between m-4'>
-                                <h6 className=''>Acessar lista de items pedidos</h6>
+                                <h6 className=''>Acessar lista de itens pedidos</h6>
                             </div>
                             <div className='d-flex justify-content-between m-4'>
                                 <h6 className=''>Acessar lista de serviços ofertados</h6>
                             </div>
                             <div className='p-1'></div>
                             <div className='d-flex justify-content-between m-4'>
-                                <h6 className=''>Acessar lista de compras registradas</h6>
+                                <h6 className=''>Acessar lista de compras realizadas</h6>
                             </div>
                             <div className='d-flex justify-content-between m-4'>
-                                <h6 className=''>Acessar lista de items comprados</h6>
+                                <h6 className=''>Acessar lista de itens comprados</h6>
                             </div>
                             <div className='d-flex justify-content-between m-4'>
                                 <h6 className=''>Acessar lista de produtos ofertados</h6>

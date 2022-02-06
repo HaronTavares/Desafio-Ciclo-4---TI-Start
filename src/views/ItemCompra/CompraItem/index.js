@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Alert, Button, Container, Table } from "reactstrap";
 
 import { api } from "../../../config";
@@ -59,6 +59,7 @@ export const CompraItem = () => {
                             <th>ID</th>
                             <th>Data da compra</th>
                             <th>ID do cliente</th>
+                            <th className='d-flex justify-content-center'>Visualizar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -67,6 +68,10 @@ export const CompraItem = () => {
                                 <td>{compra.id}</td>
                                 <td>{compra.data}</td>
                                 <td>{compra.ClienteId}</td>
+                                <td className='text-center/ d-flex justify-content-center'>
+                                    <Link to={'/listar-cliente-compra/' + compra.ClienteId}
+                                        className='btn btn-outline-primary btn-sm'>Cliente</Link>
+                                </td>
                             </tr>
                         ))}
                     </tbody>

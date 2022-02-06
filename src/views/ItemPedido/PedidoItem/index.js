@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Alert, Button, Container, Table } from "reactstrap";
 
 import { api } from "../../../config";
@@ -59,7 +59,7 @@ export const PedidoItem = () => {
                             <th>ID</th>
                             <th>Data do pedido</th>
                             <th>ID do cliente</th>
-                            {/* <th>Visualizar</th> */}
+                            <th className='d-flex justify-content-center'>Visualizar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -68,14 +68,10 @@ export const PedidoItem = () => {
                                 <td>{pedido.id}</td>
                                 <td>{pedido.data}</td>
                                 <td>{pedido.ClienteId}</td>
-                                {/* <td className='text-center/'>
-                                    <Link to={'/listar-itempedidos-pedido/' + pedido.id}
-                                        className='btn btn-outline-primary btn-sm m-1'>Consultar Itens</Link>
-                                    <Link to={'/editar-pedido/' + pedido.id}
-                                        className='btn btn-outline-primary btn-sm m-1'>Editar</Link>
-                                    <span className='btn btn-outline-danger btn-sm mr-1 m-1'
-                                        onClick={() => apagarPedido(pedido.id)}>Excluir</span>
-                                </td> */}
+                                <td className='text-center/ d-flex justify-content-center'>
+                                    <Link to={'/listar-cliente-pedido/' + pedido.ClienteId}
+                                        className='btn btn-outline-primary btn-sm'>Cliente</Link>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
