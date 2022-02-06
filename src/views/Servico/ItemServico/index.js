@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { Alert, Container, Table } from "reactstrap";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { Alert, Button, Container, Table } from "reactstrap";
 
 import { api } from "../../../config";
 
@@ -9,9 +9,11 @@ export const ItemServico = () => {
 
     const [data, setData] = useState([]);
 
+    const navegar = useNavigate();
+
     const { id } = useParams();
     console.log(Number(id));
-const [idd, /*setId*/] = useState(Number(id));
+    const [idd, /*setId*/] = useState(Number(id));
 
     const [status, setStatus] = useState({
         type: '',
@@ -44,11 +46,13 @@ const [idd, /*setId*/] = useState(Number(id));
                         <h1>Itens pedidos do serviço {idd}</h1>
                     </div>
 
-                    <div className='p-2'>
+                    {/* <div className='p-2'>
                         <Link to='/listar-servico'
                             className='btn btn-outline-success btn-sm mr-1'>Serviços</Link>
-                        {/* <Link to={'/servico/' + idd}
-                            className='btn btn-outline-primary btn-sm mr-1'>Consultar</Link> */}
+                    </div> */}
+                    <div className='p-2'>
+                        <Button className='btn btn-outline-secondary btn-sm mr-1' type='button' outline
+                            onClick={() => navegar(-1)}>Voltar</Button>
                     </div>
                 </div>
                 {status.type === 'error' ? <Alert color='danger'> {status.message} </Alert> : ""}
@@ -69,10 +73,8 @@ const [idd, /*setId*/] = useState(Number(id));
                                 <td>{item.quantidade}</td>
                                 <td>{item.valor}</td>
                                 <td className='text-center/'>
-                                    <Link to={'/listar-pedido/'}
-                                        className='btn btn-outline-primary btn-sm'>
-                                        Consultar
-                                    </Link>
+                                    <Link to={'/listar-pedido-itempedido/' + item.PedidoId}
+                                        className='btn btn-outline-primary btn-sm m-1'>Consultar Pedido</Link>
                                 </td>
                             </tr>
                         ))}

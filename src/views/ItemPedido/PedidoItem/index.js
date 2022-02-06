@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Alert, Button, Container, Table } from "reactstrap";
 
 import { api } from "../../../config";
 
-export const PedidoCliente = () => {
+export const PedidoItem = () => {
 
     const [data, setData] = useState([]);
 
@@ -22,7 +22,7 @@ export const PedidoCliente = () => {
 
     useEffect(() => {
         const getPedido = async () => {
-            await axios.get(api + '/cliente/' + idd + '/pedidos')
+            await axios.get(api + '/itempedido/' + idd + '/pedido')
                 .then((response) => {
                     console.log(response.data.pedido);
                     setData(response.data.pedido);
@@ -43,15 +43,11 @@ export const PedidoCliente = () => {
             <Container>
                 <div className='d-flex'>
                     <div className='m-auto p-2'>
-                        <h1>Pedidos do cliente {idd}</h1>
+                        <h1>Pedido do item</h1>
                     </div>
 
-                    {/* <div className='p-2'>
-                        <Link to='/listar-cliente'
-                            className='btn btn-outline-success btn-sm mr-1'>Clientes</Link>
-                    </div> */}
                     <div className='p-2'>
-                        <Button className='btn btn-outline-secondary btn-sm mr-1' type='button' outline 
+                        <Button className='btn btn-outline-secondary btn-sm mr-1' type='button' outline
                             onClick={() => navegar(-1)}>Voltar</Button>
                     </div>
                 </div>
@@ -62,18 +58,24 @@ export const PedidoCliente = () => {
                         <tr>
                             <th>ID</th>
                             <th>Data do pedido</th>
-                            <th>Visualizar</th>
+                            <th>ID do cliente</th>
+                            {/* <th>Visualizar</th> */}
                         </tr>
                     </thead>
                     <tbody>
                         {data.map(pedido => (
-                            <tr key={pedido.ClienteId}>
+                            <tr key={pedido.id}>
                                 <td>{pedido.id}</td>
                                 <td>{pedido.data}</td>
-                                <td className='text-center/'>
+                                <td>{pedido.ClienteId}</td>
+                                {/* <td className='text-center/'>
                                     <Link to={'/listar-itempedidos-pedido/' + pedido.id}
-                                        className='btn btn-outline-primary btn-sm m-1'>Itens pedidos</Link>
-                                </td>
+                                        className='btn btn-outline-primary btn-sm m-1'>Consultar Itens</Link>
+                                    <Link to={'/editar-pedido/' + pedido.id}
+                                        className='btn btn-outline-primary btn-sm m-1'>Editar</Link>
+                                    <span className='btn btn-outline-danger btn-sm mr-1 m-1'
+                                        onClick={() => apagarPedido(pedido.id)}>Excluir</span>
+                                </td> */}
                             </tr>
                         ))}
                     </tbody>

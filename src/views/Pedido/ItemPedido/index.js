@@ -1,13 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { Alert, Container, Table } from "reactstrap";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { Alert, Button, Container, Table } from "reactstrap";
 
 import { api } from "../../../config";
 
 export const ItemPedido = () => {
 
     const [data, setData] = useState([]);
+
+    const navegar = useNavigate();
 
     const { id } = useParams();
     console.log(Number(id));
@@ -44,9 +46,13 @@ export const ItemPedido = () => {
                         <h1>Itens pedidos do pedido {idd}</h1>
                     </div>
 
-                    <div className='p-2'>
+                    {/* <div className='p-2'>
                         <Link to='/listar-pedido'
                             className='btn btn-outline-success btn-sm mr-1'>Pedidos</Link>
+                    </div> */}
+                    <div className='p-2'>
+                        <Button className='btn btn-outline-secondary btn-sm mr-1' type='button' outline
+                            onClick={() => navegar(-1)}>Voltar</Button>
                     </div>
                 </div>
                 {status.type === 'error' ? <Alert color='danger'> {status.message} </Alert> : ""}
@@ -67,10 +73,8 @@ export const ItemPedido = () => {
                                 <td>{item.quantidade}</td>
                                 <td>{item.valor}</td>
                                 <td className='text-center/'>
-                                    <Link to={'/listar-pedido/'}
-                                        className='btn btn-outline-primary btn-sm'>
-                                        Consultar
-                                    </Link>
+                                    <Link to={'/listar-servico-itempedido/' + item.ServicoId}
+                                        className='btn btn-outline-primary btn-sm m-1'>Consultar Pedido</Link>
                                 </td>
                             </tr>
                         ))}

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react/cjs/react.development';
 import { Alert, Button, Container, Form, FormGroup, Input, Label, Spinner } from 'reactstrap'
 import { api } from '../../../config';
@@ -11,6 +11,8 @@ export const EditarServico = () => {
 
     const { id } = useParams();
     const [idd] = useState(Number(id));
+
+    const navegar = useNavigate();
 
     const [nome, setNome] = useState('');
     const [descricao, setDescricao] = useState('');
@@ -78,10 +80,8 @@ export const EditarServico = () => {
                     </div>
 
                     <div className='p-2'>
-                        <Link to='/listar-servico'
-                            className='btn btn-outline-success btn-sm mr-1'>Serviços</Link>
-                        {/* <Link to={'/servico/' + idd}
-                            className='btn btn-outline-primary btn-sm mr-1'>Consultar</Link> */}
+                        <Button className='btn btn-outline-secondary btn-sm mr-1' type='button' outline
+                            onClick={() => navegar(-1)}>Voltar</Button>
                     </div>
                 </div>
 

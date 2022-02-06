@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Alert, Button, Container, Table } from "reactstrap";
 
 import { api } from "../../../config";
 
-export const PedidoCliente = () => {
+export const ClientePedido = () => {
 
     const [data, setData] = useState([]);
 
@@ -21,11 +21,11 @@ export const PedidoCliente = () => {
     });
 
     useEffect(() => {
-        const getPedido = async () => {
-            await axios.get(api + '/cliente/' + idd + '/pedidos')
+        const getItem = async () => {
+            await axios.get(api + '/cliente/' + idd)
                 .then((response) => {
-                    console.log(response.data.pedido);
-                    setData(response.data.pedido);
+                    console.log(response.data.client);
+                    setData(response.data.client);
                 })
                 .catch(() => {
                     setStatus({
@@ -35,7 +35,7 @@ export const PedidoCliente = () => {
                     //console.log('Erro: sem conexão com a API.')
                 });
         };
-        getPedido();
+        getItem();
     }, [idd]);
 
     return (
@@ -43,37 +43,42 @@ export const PedidoCliente = () => {
             <Container>
                 <div className='d-flex'>
                     <div className='m-auto p-2'>
-                        <h1>Pedidos do cliente {idd}</h1>
+                        <h1>Itens pedidos do pedido {idd}</h1>
                     </div>
 
                     {/* <div className='p-2'>
-                        <Link to='/listar-cliente'
-                            className='btn btn-outline-success btn-sm mr-1'>Clientes</Link>
+                        <Link to='/listar-pedido'
+                            className='btn btn-outline-success btn-sm mr-1'>Pedidos</Link>
                     </div> */}
                     <div className='p-2'>
-                        <Button className='btn btn-outline-secondary btn-sm mr-1' type='button' outline 
+                        <Button className='btn btn-outline-secondary btn-sm mr-1' type='button' outline
                             onClick={() => navegar(-1)}>Voltar</Button>
                     </div>
                 </div>
                 {status.type === 'error' ? <Alert color='danger'> {status.message} </Alert> : ""}
 
                 <Table striped>
-                    <thead>
+                <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Data do pedido</th>
-                            <th>Visualizar</th>
+                            <th>Nome</th>
+                            <th>Endereço</th>
+                            <th>Cidade</th>
+                            <th>UF</th>
+                            <th>Nascimento</th>
+                            <th>Cliente Desde</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map(pedido => (
-                            <tr key={pedido.ClienteId}>
-                                <td>{pedido.id}</td>
-                                <td>{pedido.data}</td>
-                                <td className='text-center/'>
-                                    <Link to={'/listar-itempedidos-pedido/' + pedido.id}
-                                        className='btn btn-outline-primary btn-sm m-1'>Itens pedidos</Link>
-                                </td>
+                        {data.map(item => (
+                            <tr key={item.id}>
+                                <td>{item.id}</td>
+                                <td>{item.nome}</td>
+                                <td>{item.endereco}</td>
+                                <td>{item.cidade}</td>
+                                <td>{item.uf}</td>
+                                <td>{item.nascimento}</td>
+                                <td>{item.clienteDesde}</td>
                             </tr>
                         ))}
                     </tbody>

@@ -1,61 +1,50 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Alert, Button, Container, Form, FormGroup, Input, Label, Spinner } from "reactstrap"
+import { Alert, Button, Container, Form, FormGroup, Input, Label } from "reactstrap"
 import { api } from "../../../config";
 
-export const CadastrarServico = () => {
+export const CadastrarItemPedido = () => {
 
-    const [servico, setServico] = useState({
+    const [itempedido, setItemPedido] = useState({
         nome: '',
         descricao: ''
     });
 
     const [status, setStatus] = useState({
-        formSave: false,
         type: '',
         message: ''
     });
 
-    const valorInput = e => setServico({
-        ...servico, [e.target.name]: e.target.value
+    const valorInput = e => setItemPedido({
+        ...itempedido, [e.target.name]: e.target.value
     });
 
-    const cadServico = async e => {
+    const cadItemPedido = async e => {
         e.preventDefault();
-        // console.log(servico);
-
-        setStatus({
-            formSave: true
-        });
+        console.log(itempedido);
 
         const headers = {
             'Content-Type': 'application/json'
         };
 
-        await axios.post(api + '/servicos', servico, { headers })
+        await axios.post(api + '/itempedidos', itempedido, { headers })
             .then((response) => {
                 // console.log(response.data.message);
                 if (response.data.error) {
                     setStatus({
-                        formSave: false,
                         type: 'error',
                         message: response.data.message
                     });
                 } else {
                     setStatus({
-                        formSave: false,
                         type: 'success',
                         message: response.data.message
                     });
                 }
             })
             .catch(() => {
-                setStatus({
-                    formSave: false,
-                    type: 'error',
-                    message: 'Erro: Sem conexão com a API.'
-                })
+                console.log('Erro: Sem conexão com a API.');
             });
     };
 
@@ -63,11 +52,11 @@ export const CadastrarServico = () => {
         <Container>
             <div className='d-flex'>
                 <div className='m-auto p-2'>
-                    <h1>Cadastrar Serviço</h1>
+                    <h1>Cadastrar Item Pedido</h1>
                 </div>
                 <div className='p-2'>
-                    <Link to='/listar-servico'
-                        className='btn btn-outline-success btn-sm'>Serviços</Link>
+                    <Link to='/listar-itempedido'
+                        className='btn btn-outline-success btn-sm'>Itens Pedidos</Link>
                 </div>
             </div>
 
@@ -77,24 +66,32 @@ export const CadastrarServico = () => {
 
             {status.type === 'success' ? <Alert color='success'>{status.message}</Alert> : ''}
 
-            <Form className='p-2' onSubmit={cadServico}>
+            <Form className='p-2' onSubmit={cadItemPedido}>
                 <FormGroup className='p-2'>
-                    <Label>Nome</Label>
-                    <Input type="text" name="nome" placeholder="Nome do serviço"
+                    <Label>ID do pedido</Label>
+                    <Input type="text" name="PedidoId" placeholder="ID do pedido"
                         onChange={valorInput} />
                 </FormGroup>
 
                 <FormGroup className='p-2'>
-                    <Label>Descrição</Label>
-                    <Input type="text" name="descricao" placeholder="Descrição do serviço"
+                    <Label>ID do serviço</Label>
+                    <Input type="text" name="ServicoId" placeholder="ID do serviço"
                         onChange={valorInput} />
                 </FormGroup>
 
-                {/* <Button type='submit' outline color='success'>Cadastrar</Button> */}
-                {status.formSave ?
-                    <Button type='submit' outline color='success' disabled>Salvando...
-                        <Spinner size='sm' color='success'/></Button> :
-                    <Button type='submit' outline color='success'>Cadastrar</Button>}
+                <FormGroup className='p-2'>
+                    <Label>Quantidade</Label>
+                    <Input type="text" name="quantidade" placeholder="Quantidade do item pedido"
+                        onChange={valorInput} />
+                </FormGroup>
+
+                <FormGroup className='p-2'>
+                    <Label>Valor</Label>
+                    <Input type="text" name="valor" placeholder="Valor do item pedido"
+                        onChange={valorInput} />
+                </FormGroup>
+
+                <Button type='submit' outline color='success'>Cadastrar</Button>
                 <Button type="reset" outline color="success">Limpar</Button>
             </Form>
         </Container>

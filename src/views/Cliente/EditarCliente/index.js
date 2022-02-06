@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react/cjs/react.development';
 import { Alert, Button, Container, Form, FormGroup, Input, Label, Spinner } from 'reactstrap'
 import { api } from '../../../config';
@@ -11,6 +11,8 @@ export const EditarCliente = () => {
 
     const { id } = useParams();
     const [idd] = useState(Number(id));
+
+    const navegar = useNavigate();
 
     const [nome, setNome] = useState('');
     const [endereco, setEndereco] = useState('');
@@ -85,8 +87,8 @@ export const EditarCliente = () => {
                     </div>
 
                     <div className='p-2'>
-                        <Link to='/listar-cliente'
-                            className='btn btn-outline-success btn-sm mr-1'>Clientes</Link>
+                        <Button className='btn btn-outline-secondary btn-sm mr-1' type='button' outline
+                            onClick={() => navegar(-1)}>Voltar</Button>
                     </div>
                 </div>
 

@@ -5,7 +5,7 @@ import { useEffect } from 'react/cjs/react.development';
 import { Alert, Button, Container, Form, FormGroup, Input, Label, Spinner } from 'reactstrap'
 import { api } from '../../../config';
 
-export const EditarPedido = () => {
+export const EditarItemPedido = () => {
 
     // const [data, setData] = useState([]);
 
@@ -14,8 +14,12 @@ export const EditarPedido = () => {
 
     const navegar = useNavigate();
 
-    const [data, setData] = useState('');
-    const [ClienteId, setClienteId] = useState('');
+    console.log(idd);
+
+    const [ServicoId, setServicoId] = useState('');
+    const [quantidade, setQuantidade] = useState('');
+    const [valor, setValor] = useState('');
+
 
     const [status, setStatus] = useState({
         formSave: false,
@@ -23,14 +27,14 @@ export const EditarPedido = () => {
         message: ''
     });
 
-    const edtPedido = async e => {
+    const edtItemPedido = async e => {
         e.preventDefault();
 
         const headers = {
             'Content-Type': 'application/json'
         };
 
-        await axios.put(api + '/atualizapedido', { data, ClienteId }, { headers })
+        await axios.put(api + '/pedidos/' + idd + '/atualizaitem', { ServicoId, quantidade, valor }, { headers })
             .then((response) => {
                 // console.log(response.data.error);
                 // console.log(response.data.message);
@@ -57,17 +61,18 @@ export const EditarPedido = () => {
     };
 
     useEffect(() => {
-        const getPedido = async () => {
-            await axios.get(api + '/pedidos/' + idd)
+        const getItemPedido = async () => {
+            await axios.get(api + '/pedidos/' + idd + '/itempedidos')
                 .then((response) => {
-                    setData(response.data.pedido.data);
-                    setClienteId(response.data.pedido.ClienteId);
+                    setServicoId(response.data.itempedido.ServicoId);
+                    setQuantidade(response.data.itempedido.quantidade);
+                    setValor(response.data.itempedido.valor);
                 })
                 .catch(() => {
                     console.log('Erro: Não foi possível conectar a API.')
                 })
         };
-        getPedido();
+        getItemPedido();
     }, [idd]);
 
     return (
@@ -75,7 +80,7 @@ export const EditarPedido = () => {
             <Container>
                 <div className='d-flex'>
                     <div className='m-auto p-2'>
-                        <h1>Editar pedido</h1>
+                        <h1>Editar item pedido</h1>
                     </div>
 
                     <div className='p-2'>
@@ -90,19 +95,30 @@ export const EditarPedido = () => {
 
                 {status.type === 'success' ? <Alert color='success'>{status.message}</Alert> : ''}
 
-                <Form className='p-2' onSubmit={edtPedido}>
+                <Form className='p-2' onSubmit={edtItemPedido}>
                     <FormGroup className='p-2'>
-                        <Label>Data do pedido</Label>
-                        <Input type='date' name='date'
-                            value={data}
-                            onChange={e => setData(e.target.value)} />
+                        <Label>Insira o serviço do item a ser editado</Label>
+                        <Input type='text' name='ServicoId'
+                            placeholder='ID do serviço' value={ServicoId}
+                            onChange={e => setServicoId(e.target.value)} />
+                    </FormGroup>
+                </Form>
+
+                <hr className='m-1' />
+
+                <Form className='p-2' onSubmit={edtItemPedido}>
+                    <FormGroup className='p-2'>
+                        <Label>Quantidade</Label>
+                        <Input type='text' name='quantidade'
+                            placeholder='Quantidade do item pedido' value={quantidade}
+                            onChange={e => setQuantidade(e.target.value)} />
                     </FormGroup>
 
                     <FormGroup className='p-2'>
-                        <Label>Id do cliente</Label>
-                        <Input type='text' name='ClienteId'
-                            placeholder='Id do cliente' value={ClienteId}
-                            onChange={e => setClienteId(e.target.value)} />
+                        <Label>Valor</Label>
+                        <Input type='text' name='valor'
+                            placeholder='Valor do intem pedido' value={valor}
+                            onChange={e => setValor(e.target.value)} />
                     </FormGroup>
 
                     {status.formSave ?
