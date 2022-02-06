@@ -5,13 +5,13 @@ import { Alert, Container, Table } from "reactstrap";
 
 import { api } from "../../../config";
 
-export const ItemServico = () => {
+export const ItemPedido = () => {
 
     const [data, setData] = useState([]);
 
     const { id } = useParams();
     console.log(Number(id));
-const [idd, /*setId*/] = useState(Number(id));
+    const [idd, /*setId*/] = useState(Number(id));
 
     const [status, setStatus] = useState({
         type: '',
@@ -20,7 +20,7 @@ const [idd, /*setId*/] = useState(Number(id));
 
     useEffect(() => {
         const getItem = async () => {
-            await axios.get(api + '/servico/' + idd + '/pedidos')
+            await axios.get(api + '/pedido/' + idd + '/pedidos')
                 .then((response) => {
                     console.log(response.data.item);
                     setData(response.data.item);
@@ -41,14 +41,12 @@ const [idd, /*setId*/] = useState(Number(id));
             <Container>
                 <div className='d-flex'>
                     <div className='m-auto p-2'>
-                        <h1>Itens pedidos do serviço {idd}</h1>
+                        <h1>Itens pedidos do pedido {idd}</h1>
                     </div>
 
                     <div className='p-2'>
-                        <Link to='/listar-servico'
-                            className='btn btn-outline-success btn-sm mr-1'>Serviços</Link>
-                        {/* <Link to={'/servico/' + idd}
-                            className='btn btn-outline-primary btn-sm mr-1'>Consultar</Link> */}
+                        <Link to='/listar-pedido'
+                            className='btn btn-outline-success btn-sm mr-1'>Pedidos</Link>
                     </div>
                 </div>
                 {status.type === 'error' ? <Alert color='danger'> {status.message} </Alert> : ""}
@@ -56,7 +54,7 @@ const [idd, /*setId*/] = useState(Number(id));
                 <Table striped>
                     <thead>
                         <tr>
-                            <th>Pedido</th>
+                            <th>Serviço</th>
                             <th>Quantidade</th>
                             <th>Valor</th>
                             <th>Visualizar</th>
@@ -64,8 +62,8 @@ const [idd, /*setId*/] = useState(Number(id));
                     </thead>
                     <tbody>
                         {data.map(item => (
-                            <tr key={item.ServicoId}>
-                                <td>{item.PedidoId}</td>
+                            <tr key={item.PedidoId}>
+                                <td>{item.ServicoId}</td>
                                 <td>{item.quantidade}</td>
                                 <td>{item.valor}</td>
                                 <td className='text-center/'>
