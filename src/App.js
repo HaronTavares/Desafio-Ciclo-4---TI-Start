@@ -3,12 +3,17 @@ import { BrowserRouter as Router, Routes as Switch, Route } from 'react-router-d
 
 import { Menu } from './components/Menu.js';
 import { Home } from './views/Home';
-import { ListarCliente } from './views/Cliente/Listar/';
+
+import { CadastrarCliente } from './views/Cliente/CadastrarCliente'
+import { ListarCliente } from './views/Cliente/ListarCliente';
+import { EditarCliente } from './views/Cliente/EditarCliente';
+
 import { ListarPedido } from './views/Pedido/Listar/';
+
+import { CadastrarServico } from './views/Servico/CadastrarServico';
 import { ListarServico } from './views/Servico/ListarServico/';
-import { Item } from './views/Servico/Item/';
-import { Cadastrar } from './views/Servico/Cadastrar';
-import { Editar } from './views/Servico/EditarServico';
+import { EditarServico } from './views/Servico/EditarServico';
+import { ItemServico } from './views/Servico/ItemServico/';
 
 function App() {
   return (
@@ -17,12 +22,17 @@ function App() {
         <Menu />
         <Switch>
           <Route path="/" element={<Home />} />
+
+          <Route path='/cadastrar-cliente' element={<CadastrarCliente />} />
           <Route path='/listar-cliente' element={<ListarCliente />} />
+          <Route path='/editar-cliente/:id' element={<EditarCliente />} />
+
           <Route path='/listar-pedido' element={<ListarPedido />} />
+
+          <Route path='/cadastrar-servico' element={<CadastrarServico />} />
           <Route path='/listar-servico' element={<ListarServico />} />
-          <Route path='/listar-pedido/:id' element={<Item />} />
-          <Route path='/cadastrar-servico' element={<Cadastrar />} />
-          <Route path='/editar-pedido/:id' element={<Editar />} />
+          <Route path='/editar-servico/:id' element={<EditarServico />} />
+          <Route path='/listar-itempedidos-servico/:id' element={<ItemServico />} />    
         </Switch>
       </Router>
     </div>

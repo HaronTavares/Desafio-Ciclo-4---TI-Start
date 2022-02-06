@@ -5,7 +5,7 @@ import { Alert, Container, Table } from "reactstrap";
 
 import { api } from "../../../config";
 
-export const ListarServico = () => {
+export const ListarCliente = () => {
 
     const [data, setData] = useState([]);
 
@@ -14,11 +14,11 @@ export const ListarServico = () => {
         message: ''
     });
 
-    const getServicos = async () => {
-        await axios.get(api + '/listaservicos')
+    const getClientes = async () => {
+        await axios.get(api + '/listaclientes')
             .then((response) => {
-                console.log(response.data.servicos);
-                setData(response.data.servicos);
+                console.log(response.data.clientes);
+                setData(response.data.clientes);
             })
             .catch(() => {
                 setStatus({
@@ -29,17 +29,17 @@ export const ListarServico = () => {
             });
     };
 
-    const apagarServico = async (idServico) => {
-        console.log(idServico);
+    const apagarCliente = async (idCliente) => {
+        console.log(idCliente);
 
         const headers = {
             'Content-Type': 'application/json'
         };
 
-        await axios.get(api + '/excluirservico/' + idServico, { headers })
+        await axios.get(api + '/excluircliente/' + idCliente, { headers })
             .then((response) => {
                 console.log(response.data.error);
-                getServicos();
+                getClientes();
             })
             .catch(() => {
                 setStatus({
@@ -50,7 +50,7 @@ export const ListarServico = () => {
     };
 
     useEffect(() => {
-        getServicos();
+        getClientes();
     }, []);
 
     return (
@@ -58,14 +58,12 @@ export const ListarServico = () => {
             <Container>
                 <div className='d-flex'>
                     <div className='m-auto p-2'>
-                        <h1>Visualizar informações do servico</h1>
+                        <h1>Visualizar clientes</h1>
                     </div>
 
                     <div className='p-2'>
-                        <Link to='/cadastrar-servico'
+                        <Link to='/cadastrar-cliente'
                             className='btn btn-outline-success btn-sm'>Cadastrar</Link>
-                        {/* <Link to={'/servico/' + idd}
-                            className='btn btn-outline-primary btn-sm mr-1'>Consultar</Link>*/}
                     </div>
                 </div>
                 {status.type === 'error' ? <Alert color='danger'> {status.message} </Alert> : ""}
@@ -75,8 +73,11 @@ export const ListarServico = () => {
                         <tr>
                             <th>ID</th>
                             <th>Nome</th>
-                            <th>Descrição</th>
-                            <th>Ação</th>
+                            <th>Endereço</th>
+                            <th>Cidade</th>
+                            <th>UF</th>
+                            <th>Nascimento</th>
+                            <th>Cliente Desde</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -84,14 +85,18 @@ export const ListarServico = () => {
                             <tr key={item.id}>
                                 <td>{item.id}</td>
                                 <td>{item.nome}</td>
-                                <td>{item.descricao}</td>
+                                <td>{item.endereco}</td>
+                                <td>{item.cidade}</td>
+                                <td>{item.uf}</td>
+                                <td>{item.nascimento}</td>
+                                <td>{item.clienteDesde}</td>
                                 <td className='text-center/'>
-                                    <Link to={'/listar-itempedidos-servico/' + item.id}
+                                    <Link to={'/listar-pedidos-clientes/' + item.id}
                                         className='btn btn-outline-primary btn-sm m-1'>Consultar</Link>
-                                    <Link to={'/editar-servico/' + item.id}
+                                    <Link to={'/editar-cliente/' + item.id}
                                         className='btn btn-outline-primary btn-sm m-1'>Editar</Link>
                                     <span className='btn btn-outline-danger btn-sm mr-1 m-1'
-                                        onClick={() => apagarServico(item.id)}>Excluir</span>
+                                        onClick={() => apagarCliente(item.id)}>Excluir</span>
                                 </td>
                             </tr>
                         ))}

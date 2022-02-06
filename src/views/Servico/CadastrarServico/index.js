@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Alert, Button, Container, Form, FormGroup, Input, Label } from "reactstrap"
 import { api } from "../../../config";
 
-export const Cadastrar = () => {
+export const CadastrarServico = () => {
 
     const [servico, setServico] = useState({
         nome: '',
